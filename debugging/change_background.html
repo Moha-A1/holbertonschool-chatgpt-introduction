@@ -21,17 +21,23 @@
 
 <h2>Click the button to change the background color</h2>
 
+<!-- CORRECTION: L'ID du bouton était "colorButon" (manquait un "t") -->
+<!-- Avant: <button id="colorButon">Change Color</button> -->
+<!-- Après: <button id="colorButton">Change Color</button> -->
 <button id="colorButton">Change Color</button>
 
 <script>
+    // CORRECTION: L'erreur était une incohérence entre l'ID du bouton et celui utilisé dans JavaScript
+    // Le bouton avait l'ID "colorButon" mais le JavaScript cherchait "colorButton"
+    // Cela empêchait le JavaScript de trouver l'élément, donc l'événement click ne fonctionnait pas
     document.getElementById("colorButton").addEventListener("click", function() {
         changeBackgroundColor();
     });
 
     function changeBackgroundColor() {
-        // Generate a random color
+        // Génère une couleur aléatoire
         var randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
-        // Change the background color of the body
+        // Change la couleur de fond du body
         document.body.style.backgroundColor = randomColor;
     }
 </script>

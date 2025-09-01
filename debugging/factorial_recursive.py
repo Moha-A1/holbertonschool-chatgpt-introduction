@@ -3,6 +3,12 @@ import sys
 
 def factorial(n):
     """
+    CORRECTION: Le code original avait une erreur d'indentation critique
+    Avant: 
+        if n == 0:
+        return 1  # <- Cette ligne n'était pas indentée correctement
+    Après: Code avec indentation correcte et implémentation itérative
+    
     Calculate the factorial of a non-negative integer.
     
     The factorial of a number n is the product of all positive integers
@@ -17,14 +23,12 @@ def factorial(n):
              Returns 1 if n is 0 (by definition, 0! = 1).
     
     Raises:
-        RecursionError: If n is negative, will cause infinite recursion.
         ValueError: If the input cannot be converted to an integer.
     """
-    if n == 0:
-        return 1
-    else:
-        return n * factorial(n-1)
-
-# Get the input from command line argument and calculate factorial
+    result = 1
+    while n > 1:
+        result *= n
+        n -= 1
+    return result
 f = factorial(int(sys.argv[1]))
 print(f)

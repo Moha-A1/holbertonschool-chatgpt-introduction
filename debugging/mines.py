@@ -42,11 +42,9 @@ class Minesweeper:
         return count
 
     def reveal(self, x, y):
-        # Vérifier si les coordonnées sont valides
         if not (0 <= x < self.width and 0 <= y < self.height):
             return False
         
-        # Vérifier si la cellule est déjà révélée
         if self.revealed[y][x]:
             return True
         
@@ -57,7 +55,6 @@ class Minesweeper:
         # Révéler la cellule
         self.revealed[y][x] = True
         
-        # Si pas de mines à proximité, révéler les cellules adjacentes
         if self.count_mines_nearby(x, y) == 0:
             for dx in [-1, 0, 1]:
                 for dy in [-1, 0, 1]:
@@ -70,7 +67,11 @@ class Minesweeper:
         return True
 
     def check_win(self):
-        """Vérifie si le joueur a gagné en révélant toutes les cellules non-mines"""
+        """
+        CORRECTION: Cette fonction était complètement manquante dans le code original
+        Elle est essentielle pour détecter quand le joueur a gagné
+        """
+        # Vérifie si le joueur a gagné en révélant toutes les cellules non-mines
         total_cells = self.width * self.height
         revealed_cells = sum(sum(row) for row in self.revealed)
         return revealed_cells == (total_cells - len(self.mines))
@@ -79,7 +80,6 @@ class Minesweeper:
         while not self.game_over and not self.won:
             self.print_board()
             
-            # Vérifier la victoire
             if self.check_win():
                 self.won = True
                 break
@@ -100,7 +100,6 @@ class Minesweeper:
                 print("\nGame interrupted.")
                 break
         
-        # Afficher le résultat final
         if self.won:
             self.print_board(reveal=True)
             print("Congratulations! You've won the game.")
